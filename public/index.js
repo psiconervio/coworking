@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function loadSectors() {
-    fetch('/sectors')
+    fetch('/sectors.json')
         .then(response => response.json())
         .then(data => {
             Object.keys(data).forEach(sectorId => {
