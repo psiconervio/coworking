@@ -1,0 +1,14 @@
+{
+    "sectorA": "libre",
+    "sectorB": "ocupado",
+    "sectorC": "reservado",
+    "sectorD": "libre",
+    "sectorE": "ocupado",
+    "sectorF": "reservado",
+    "sectorG": "libre",
+    "sectorH": "ocupado",
+    "sectorI": "reservado",
+    "sectorJ": "libre",
+    "sectorK": "ocupado",
+    "sectorP": "reservado"
+}
