@@ -35,7 +35,7 @@ function changeSectorState(sectorId) {
 }
 
 function updateSectors(sectorId, newState) {
-    fetch('/sectors', {
+    fetch('/sectors.json', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
