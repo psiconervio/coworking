@@ -11,16 +11,45 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Manejar la ruta /sectors
+// Ruta para manejar '/sectors' y devolver datos en formato JSON
 app.get('/sectors', (req, res) => {
-    // Aquí deberías definir qué hacer cuando se accede a /sectors
-    res.status(404).send('Página no encontrada');
+    const sectorsData = [
+        { id: 'A', status: 'libre' },
+        { id: 'B', status: 'ocupado' },
+        { id: 'C', status: 'reservado' },
+        // Agrega más datos de sectores según sea necesario
+    ];
+    res.json(sectorsData);
 });
 
 // Iniciar el servidor
 app.listen(port, () => {
     console.log(`Servidor escuchando en el puerto ${port}`);
 });
+
+// const express = require('express');
+// const path = require('path');
+// const app = express();
+// const port = process.env.PORT || 3000;
+
+// // Servir archivos estáticos desde la carpeta 'public'
+// app.use(express.static(path.join(__dirname, 'public')));
+
+// // Ruta para servir el archivo index.html
+// app.get('/', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// });
+
+// // Manejar la ruta /sectors
+// app.get('/sectors', (req, res) => {
+//     // Aquí deberías definir qué hacer cuando se accede a /sectors
+//     res.status(404).send('Página no encontrada');
+// });
+
+// // Iniciar el servidor
+// app.listen(port, () => {
+//     console.log(`Servidor escuchando en el puerto ${port}`);
+// });
 
 // const express = require('express');
 // const bodyParser = require('body-parser');
