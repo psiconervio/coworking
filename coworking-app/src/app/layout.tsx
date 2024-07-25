@@ -20,3 +20,14 @@ export default function RootLayout({
     </html>
   );
 }
+// export default function RootLayout({ children }) {
+//   return (
+//     <html lang="es">
+//       <head>
+//         <title>Estado de Sectores del Plano</title>
+//         <link rel="icon" href="/favicon.ico" />
+//       </head>
+//       <body>{children}</body>
+//     </html>
+//   );
+// }

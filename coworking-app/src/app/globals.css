@@ -31,3 +31,35 @@ body {
     text-wrap: balance;
   }
 }
+
+
+body {
+  @apply bg-gray-100;
+  @apply p-4;
+}
+
+.container {
+  @apply relative;
+  @apply mx-auto;
+}
+
+.sector {
+  @apply absolute;
+  @apply text-white;
+  @apply rounded;
+  @apply font-bold;
+  @apply cursor-pointer;
+}
+
+.libre {
+  @apply bg-green-500;
+}
+
+.ocupado {
+  @apply bg-red-500;
+}
+
+.reservado {
+  @apply bg-yellow-500;
+  @apply text-black;
+}
