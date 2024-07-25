@@ -1,44 +1,47 @@
+// src/app/page.js
 'use client'
-import React from 'react';
-
-import { useState, useEffect } from 'react';
-
+import React, { useState, useEffect } from 'react';
 
 export default function Home() {
   const [sectors, setSectors] = useState([]);
 
   useEffect(() => {
     fetch('/api/sectors')
-      .then(response => response.json())
-      .then(data => {
-        setSectors(data);
-      })
-      .catch(error => console.error('Error loading sectors:', error));
+      .then((response) => response.json())
+      .then((data) => setSectors(data));
   }, []);
 
-  const handleSectorClick = (id) => {
-    setSectors(prevSectors => {
-      const updatedSectors = prevSectors.map(sector => {
-        if (sector.id === id) {
-          const newStatus = sector.status === 'libre' ? 'ocupado' : sector.status === 'ocupado' ? 'reservado' : 'libre';
-          fetch('/api/sectors', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id, status: newStatus }),
-          })
-            .then(response => response.json())
-            .then(updatedData => {
-              setSectors(updatedData);
-            })
-            .catch(error => console.error('Error updating sector:', error));
-          return { ...sector, status: newStatus };
-        }
-        return sector;
-      });
-      return updatedSectors;
+  const handleSectorClick = async (id) => {
+    const sector = sectors.find((s) => s.id === id);
+    const newStatus = sector.status === 'libre' ? 'ocupado' : sector.status === 'ocupado' ? 'reservado' : 'libre';
+    
+    await fetch(`/api/sectors/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ status: newStatus }),
     });
+
+    setSectors(sectors.map((s) => (s.id === id ? { ...s, status: newStatus } : s)));
+  };
+
+  const getSectorStyle = (id) => {
+    const styles = {
+      sectorA: { top: '59px', right: '190px', padding: '20px' },
+      sectorB: { top: '60px', left: '484px', padding: '20px' },
+      sectorC: { top: '60px', left: '407px', padding: '20px' },
+      sectorD: { top: '152px', left: '508px', padding: '47px 60px' },
+      sectorE: { top: '129px', left: '409px', padding: '32px 38px' },
+      sectorF: { top: '220px', left: '421px', padding: '14px 25px' },
+      sectorG: { top: '125px', left: '266px', padding: '30px 50px' },
+      sectorH: { top: '219px', left: '294px', padding: '14px 25px' },
+      sectorI: { top: '137px', left: '205px', padding: '30px 20px' },
+      sectorJ: { top: '197px', left: '140px', padding: '20px 24px' },
+      sectorK: { top: '86px', left: '144px', padding: '20px' },
+      sectorP: { top: '14px', left: '183px', padding: '17px' },
+    };
+    return styles[id];
   };
 
   return (
@@ -46,7 +49,7 @@ export default function Home() {
       <h1 className="text-2xl font-bold mb-4">Estado de Sectores del Plano</h1>
       <div className="relative w-full">
         <img src="/xd.jpg" alt="Plano de Sectores" className="w-full h-auto" />
-        {sectors.map(sector => (
+        {sectors.map((sector) => (
           <div
             key={sector.id}
             id={sector.id}
@@ -62,24 +65,88 @@ export default function Home() {
   );
 }
 
-const getSectorStyle = (id) => {
-  const styles = {
-    sectorA: { top: '23%', left: '70%', padding: '2.5%' },
-    sectorB: { top: '23%', left: '60.5%', padding: '2.5%' },
-    sectorC: { top: '23%', left: '51%', padding: '2.5%' },
-    sectorD: { top: '50%', left: '63.5%', padding: '7.5% 8%' },
-    sectorE: { top: '46%', left: '51%', padding: '4% 5%' },
-    sectorF: { top: '75%', left: '51%', padding: '2.5% 4.5%' },
-    sectorG: { top: '38%', left: '32%', padding: '5% 8%' },
-    sectorH: { top: '74%', left: '35%', padding: '2.5% 4.5%' },
-    sectorI: { top: '44%', left: '25%', padding: '5% 3%' },
-    sectorJ: { top: '70%', left: '16.5%', padding: '3.5% 4%' },
-    sectorK: { top: '30%', left: '18%', padding: '2.5%' },
-    sectorP: { top: '5%', left: '22.5%', padding: '2.3%' },
-  };
+// 'use client'
+// import React from 'react';
 
-  return styles[id] || {};
-};
+// import { useState, useEffect } from 'react';
+
+
+// export default function Home() {
+//   const [sectors, setSectors] = useState([]);
+
+//   useEffect(() => {
+//     fetch('/api/sectors')
+//       .then(response => response.json())
+//       .then(data => {
+//         setSectors(data);
+//       })
+//       .catch(error => console.error('Error loading sectors:', error));
+//   }, []);
+
+//   const handleSectorClick = (id) => {
+//     setSectors(prevSectors => {
+//       const updatedSectors = prevSectors.map(sector => {
+//         if (sector.id === id) {
+//           const newStatus = sector.status === 'libre' ? 'ocupado' : sector.status === 'ocupado' ? 'reservado' : 'libre';
+//           fetch('/api/sectors', {
+//             method: 'POST',
+//             headers: {
+//               'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify({ id, status: newStatus }),
+//           })
+//             .then(response => response.json())
+//             .then(updatedData => {
+//               setSectors(updatedData);
+//             })
+//             .catch(error => console.error('Error updating sector:', error));
+//           return { ...sector, status: newStatus };
+//         }
+//         return sector;
+//       });
+//       return updatedSectors;
+//     });
+//   };
+
+//   return (
+//     <div className="container mx-auto px-4">
+//       <h1 className="text-2xl font-bold mb-4">Estado de Sectores del Plano</h1>
+//       <div className="relative w-full">
+//         <img src="/xd.jpg" alt="Plano de Sectores" className="w-full h-auto" />
+//         {sectors.map(sector => (
+//           <div
+//             key={sector.id}
+//             id={sector.id}
+//             className={`sector ${sector.status} absolute`}
+//             onClick={() => handleSectorClick(sector.id)}
+//             style={getSectorStyle(sector.id)}
+//           >
+//             {sector.name}
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
+
+// const getSectorStyle = (id) => {
+//   const styles = {
+//     sectorA: { top: '23%', left: '70%', padding: '2.5%' },
+//     sectorB: { top: '23%', left: '60.5%', padding: '2.5%' },
+//     sectorC: { top: '23%', left: '51%', padding: '2.5%' },
+//     sectorD: { top: '50%', left: '63.5%', padding: '7.5% 8%' },
+//     sectorE: { top: '46%', left: '51%', padding: '4% 5%' },
+//     sectorF: { top: '75%', left: '51%', padding: '2.5% 4.5%' },
+//     sectorG: { top: '38%', left: '32%', padding: '5% 8%' },
+//     sectorH: { top: '74%', left: '35%', padding: '2.5% 4.5%' },
+//     sectorI: { top: '44%', left: '25%', padding: '5% 3%' },
+//     sectorJ: { top: '70%', left: '16.5%', padding: '3.5% 4%' },
+//     sectorK: { top: '30%', left: '18%', padding: '2.5%' },
+//     sectorP: { top: '5%', left: '22.5%', padding: '2.3%' },
+//   };
+
+//   return styles[id] || {};
+// };
 
 // 'use client'
 // import { useState, useEffect } from 'react';
