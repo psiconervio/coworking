@@ -74,7 +74,7 @@ function getPositionStyles(id) {
     A: { top: '50px', right: '165px' },
     B: { top: '50px', left: '350px' },
     C: { top: '50px', left: '450px' },
-    D: { top: '160px', left: '565px' },
+    D: { top: '100px', left: '565px' },
     E: { top: '135px', left: '440px' },
     F: { top: '230px', left: '400px' },
     G: { top: '180px', left: '311px' },

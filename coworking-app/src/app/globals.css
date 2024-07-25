@@ -49,17 +49,32 @@ body {
   @apply rounded;
   @apply font-bold;
   @apply cursor-pointer;
+  @apply flex;
+  @apply justify-center;
+  @apply items-center;
+  @apply text-sm;
+  @apply leading-none;
+}
+@media (max-width: 768px) {
+  .sector {
+    width: 8%; /* Ajusta el tamaño de los sectores para pantallas más pequeñas */
+  }
 }
 
+@media (max-width: 480px) {
+  .sector {
+    width: 10%; /* Ajusta aún más para pantallas más pequeñas */
+  }
+}
 .libre {
-  @apply bg-green-500;
+  @apply bg-green-500 bg-opacity-50;
 }
 
 .ocupado {
-  @apply bg-red-500;
+  @apply bg-red-500 bg-opacity-50;
 }
 
 .reservado {
-  @apply bg-yellow-500;
+  @apply bg-yellow-500 bg-opacity-50;
   @apply text-black;
 }

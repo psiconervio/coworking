@@ -42,7 +42,7 @@ export default function Home() {
     <div className="container mx-auto px-4">
       <h1 className="text-2xl font-bold mb-4">Estado de Sectores del Plano</h1>
       <div className="relative w-full">
-        <img src="/xd.jpg" alt="Plano de Sectores" className="w-full h-auto relative" />
+        <img src="/xd.jpg" alt="Plano de Sectores" className="w-full h-auto" />
         {sectors.map(sector => (
           <div
             key={sector.id}
@@ -61,22 +61,102 @@ export default function Home() {
 
 const getSectorStyle = (id) => {
   const styles = {
-    sectorA: { top: '7%', left: '77.5%', padding: '2.5%' },
-    sectorB: { top: '7%', left: '60.5%', padding: '2.5%' },
-    sectorC: { top: '7%', left: '51%', padding: '2.5%' },
-    sectorD: { top: '19%', left: '63.5%', padding: '7.5% 10%' },
-    sectorE: { top: '16%', left: '51%', padding: '5.5% 6.5%' },
-    sectorF: { top: '28%', left: '52%', padding: '2.5% 4.5%' },
-    sectorG: { top: '15%', left: '33%', padding: '5% 8%' },
-    sectorH: { top: '27%', left: '36%', padding: '2.5% 4.5%' },
-    sectorI: { top: '17%', left: '25%', padding: '5% 3%' },
-    sectorJ: { top: '25%', left: '16.5%', padding: '3.5% 4%' },
-    sectorK: { top: '11%', left: '16.5%', padding: '2.5%' },
-    sectorP: { top: '2%', left: '21%', padding: '2.1%' },
+    sectorA: { top: '23%', left: '70%', padding: '2.5%' },
+    sectorB: { top: '23%', left: '60.5%', padding: '2.5%' },
+    sectorC: { top: '23%', left: '51%', padding: '2.5%' },
+    sectorD: { top: '50%', left: '63.5%', padding: '7.5% 8%' },
+    sectorE: { top: '46%', left: '51%', padding: '4% 5%' },
+    sectorF: { top: '75%', left: '51%', padding: '2.5% 4.5%' },
+    sectorG: { top: '38%', left: '32%', padding: '5% 8%' },
+    sectorH: { top: '74%', left: '35%', padding: '2.5% 4.5%' },
+    sectorI: { top: '44%', left: '25%', padding: '5% 3%' },
+    sectorJ: { top: '70%', left: '16.5%', padding: '3.5% 4%' },
+    sectorK: { top: '30%', left: '18%', padding: '2.5%' },
+    sectorP: { top: '5%', left: '22.5%', padding: '2.3%' },
   };
 
   return styles[id] || {};
 };
+
+// 'use client'
+// import { useState, useEffect } from 'react';
+
+// export default function Home() {
+//   const [sectors, setSectors] = useState([]);
+
+//   useEffect(() => {
+//     fetch('/api/sectors')
+//       .then(response => response.json())
+//       .then(data => {
+//         setSectors(data);
+//       })
+//       .catch(error => console.error('Error loading sectors:', error));
+//   }, []);
+
+//   const handleSectorClick = (id) => {
+//     setSectors(prevSectors => {
+//       const updatedSectors = prevSectors.map(sector => {
+//         if (sector.id === id) {
+//           const newStatus = sector.status === 'libre' ? 'ocupado' : sector.status === 'ocupado' ? 'reservado' : 'libre';
+//           fetch('/api/sectors', {
+//             method: 'POST',
+//             headers: {
+//               'Content-Type': 'application/json',
+//             },
+//             body: JSON.stringify({ id, status: newStatus }),
+//           })
+//             .then(response => response.json())
+//             .then(updatedData => {
+//               setSectors(updatedData);
+//             })
+//             .catch(error => console.error('Error updating sector:', error));
+//           return { ...sector, status: newStatus };
+//         }
+//         return sector;
+//       });
+//       return updatedSectors;
+//     });
+//   };
+
+//   return (
+//     <div className="container mx-auto px-4">
+//       <h1 className="text-2xl font-bold mb-4">Estado de Sectores del Plano</h1>
+//       <div className="relative w-full">
+//         <img src="/xd.jpg" alt="Plano de Sectores" className="w-full h-auto relative" />
+//         {sectors.map(sector => (
+//           <div
+//             key={sector.id}
+//             id={sector.id}
+//             className={`sector ${sector.status} absolute`}
+//             onClick={() => handleSectorClick(sector.id)}
+//             style={getSectorStyle(sector.id)}
+//           >
+//             {sector.name}
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
+
+// const getSectorStyle = (id) => {
+//   const styles = {
+//     sectorA: { top: '7%', left: '77.5%', padding: '2.5%' },
+//     sectorB: { top: '7%', left: '60.5%', padding: '2.5%' },
+//     sectorC: { top: '7%', left: '51%', padding: '2.5%' },
+//     sectorD: { top: '50%', left: '63.5%', padding: '7.5% 10%' },
+//     sectorE: { top: '44%', left: '51%', padding: '4% 5%' },
+//     sectorF: { top: '75%', left: '51%', padding: '2.5% 4.5%' },
+//     sectorG: { top: '38%', left: '32%', padding: '5% 8%' },
+//     sectorH: { top: '74%', left: '35%', padding: '2.5% 4.5%' },
+//     sectorI: { top: '44%', left: '25%', padding: '5% 3%' },
+//     sectorJ: { top: '65%', left: '16.5%', padding: '3.5% 4%' },
+//     sectorK: { top: '27%', left: '18%', padding: '2.5%' },
+//     sectorP: { top: '2%', left: '21%', padding: '2.1%' },
+//   };
+
+//   return styles[id] || {};
+// };
 
 
 
